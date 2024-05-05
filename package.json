@@ -1,0 +1,27 @@
+{
+  "name": "movie_api",
+  "version": "1.0.0",
+  "description": "This API allows you to receive information on movies, directors, and genres so that you can learn more about movies you have watched or are interested in. You are able to create a profile so you can save data about your favorite movies.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onorris/movie_api.git"
+  },
+  "keywords": [
+    "movie",
+    "api"
+  ],
+  "author": "Olivia Norris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onorris/movie_api/issues"
+  },
+  "homepage": "https://github.com/onorris/movie_api#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2"
+  }
+}
