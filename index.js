@@ -27,6 +27,12 @@ const topTenMovies =
 //setup the logger//
 app.use(morgan('combined', {stream:accessLogStream}));
 
+//code for errors //
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
+
 //displays text//
 app.get('/', (req, res) => {
     res.send('Welcome to my Movie Club!');
