@@ -16,6 +16,7 @@ const topTenMovies =
         'Parasite',
         'Rent',
         'Everything Everywhere All At Once']}
+
 //displays text//
 app.get('/', (req, res) => {
     res.send('Welcome to my Movie Club!');
@@ -26,6 +27,14 @@ app.get('/movies', (req, res) => {
     res.json(topTenMovies);
 })
 
+//step 4 - express.static serves documentation.html file from the public folder//
+app.use('/documentation.html', express.static('public'));;
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
+
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`API listening on port ${8080}`)
   })
