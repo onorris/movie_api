@@ -1,8 +1,15 @@
 //imports the express module locally so it can be used //
 const express = require('express');
+    morgan = require('morgan'),
+    fs = require('fs'), //import built in node modules fs and path 
+    path = require('path');
 
 //declares 'app' variable that encapsulates Express's functionality to configure your web server//
 const app = express();
+
+//creatrs a write stream in append mode, and a log.txt file in the root directory//
+//no longer useing node built in modules 'fs' and 'path'//
+const accessLogStream = fs.createWriteStream(path.join(_dirname, 'log.txt'), {flags: 'a'})
 const port = 8080
 const topTenMovies = 
     {movies: 
@@ -16,6 +23,9 @@ const topTenMovies =
         'Parasite',
         'Rent',
         'Everything Everywhere All At Once']}
+
+//setup the logger//
+app.use(morgan('combined', {stream:accessLogStream}));
 
 //displays text//
 app.get('/', (req, res) => {
@@ -36,5 +46,5 @@ app.use((err, req, res, next) => {
   });
 
 app.listen(port, () => {
-    console.log(`API listening on port ${8080}`)
-  })
+    console.log(`API listening on port 8080`);
+  });
