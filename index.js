@@ -9,7 +9,7 @@ const app = express();
 
 //creatrs a write stream in append mode, and a log.txt file in the root directory//
 //no longer useing node built in modules 'fs' and 'path'//
-const accessLogStream = fs.createWriteStream(path.join(_dirname, 'log.txt'), {flags: 'a'})
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 const port = 8080
 const topTenMovies = 
     {movies: 
@@ -44,7 +44,10 @@ app.get('/movies', (req, res) => {
 })
 
 //step 4 - express.static serves documentation.html file from the public folder//
-app.use('/documentation.html', express.static('public'));;
+//app.use('/documentation.html', express.static('public'));;
+app.get('/documentation', function(req, res) {
+    res.sendFile(path.join(__dirname, 'public/documentation.html'));
+  });
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
