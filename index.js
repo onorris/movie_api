@@ -24,26 +24,27 @@ const topTenMovies =
         'Rent',
         'Everything Everywhere All At Once']}
 
-//setup the logger//
-app.use(morgan('combined', {stream:accessLogStream}));
-
-//code for errors //
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-  });
-
-//step 4 - express.static serves documentation.html file from the public folder//
-app.use(express.static(path.join(__dirname, 'public')));
-
-//pulls movie data//
+//step 2 - pulls movie data//
 app.get('/movies', (req, res) => {
     res.json(topTenMovies);
 })
 
+//step 3 - text response of my choosing//
 app.get('/', (req, res) => {
     res.send('Welcome to my Movie Club!');
 })
+
+//step 4 - express.static serves documentation.html file from the public folder//
+app.use(express.static(path.join(__dirname, 'public')));
+
+//step 5 - setup the logger//
+app.use(morgan('combined', {stream:accessLogStream}));
+
+//step 6 - code for errors //
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
 
 app.listen(port, () => {
     console.log(`API listening on port 8080`);
