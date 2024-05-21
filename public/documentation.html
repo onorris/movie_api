@@ -9,5 +9,119 @@
     <h1>Movie API</h1>
     <p>This API allows you to receive information on movies, directors, and genres so that you can learn more about movies
         you have watched or are interested in. You are able to create a profile so you can save data about your favorite movies.</p>
-</body>
+  
+        <style>
+            table td, table th {
+                font-size: smaller;
+                border: 1px solid black;
+                line-height: 1.4;
+                padding: 10px 10px;
+            }
+        </style>
+        <table>
+            <tbody>
+                <tr>
+                    <th>REQUEST</th>
+                    <th>URL</th>
+                    <th>HTTP METHOD</th>
+                    <th>Request Body Data Format</th>
+                    <th>Response Body Data Format</th>
+                </tr>
+                <tr>
+                    <td>Return a list of ALL movies</td>
+                    <td>/movies</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about all the movies</td>
+                </tr>
+                <tr>
+                    <td>Return data about a SINGLE movie by description</td>
+                    <td>/movies/[description]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about a single movie, based on its description</td>
+                </tr>
+                <tr>
+                    <td>Return data about a SINGLE movie by genre</td>
+                    <td>/movies/[genre]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about a single movie, based on the genre</td>
+                </tr>
+                <tr>
+                    <td>Return data about a SINGLE movie by director name</td>
+                    <td>/movies/[director]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about a single movie, based on the director</td>
+                </tr>
+                <tr>
+                    <td>Return data about a SINGLE movie by image URL</td>
+                    <td>/movies/[image]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about a single movie, based on image URL</td>
+                </tr>
+                <tr>
+                    <td>Return data about a SINGLE movie by whether or not its featured</td>
+                    <td>/movies/[featured]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about a single movie, based on whether or not its featured</td>
+                </tr>
+                <tr>
+                    <td>Return data about a genre (description) by name/title of movie</td>
+                    <td>/movies/[genre]/[name]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about the genre of a specific movie</td>
+                </tr>
+                <tr>
+                    <td>Return data about a director (bio, birth year, death year) by name</td>
+                    <td>/movies/[director]/[name]</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about a director, based on name</td>
+                </tr>
+                <tr>
+                    <td>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added)
+                    </td>
+                    <td>/movies</td>
+                    <td>PUT</td>
+                    <td>None</td>
+                    <td>Text indicating that a movie has been added to a list</td>
+                </tr>
+                <tr>
+                    <td>Remove a movie from their list of favorites </td>
+                    <td>/movies/[ID]</td>
+                    <td>DELETE</td>
+                    <td>None</td>
+                    <td>Text that a movie has been removed</td>
+                </tr>
+                <tr>
+                    <td>Allow new users to register</td>
+                    <td>/users</td>
+                    <td>POST</td>
+                    <td>A JSON object holding data about the user to add</td>
+                    <td>Text indicating that user has been registered</td>
+                </tr>
+                <tr>
+                    <td>Allow new users to update their user info (username)</td>
+                    <td>/users</td>
+                    <td>PUT</td>
+                    <td>None</td>
+                    <td>Text indicating that their username has been updated</td>
+                </tr>
+                <tr>
+                    <td>Allow existing users to deregister (showing text that a user email has been removed)</td>
+                    <td>/users</td>
+                    <td>DELETE</td>
+                    <td>None</td>
+                    <td>Text that a user email has been removed</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </body>
 </html>
