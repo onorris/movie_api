@@ -7,6 +7,9 @@ const express = require('express');
 //declares 'app' variable that encapsulates Express's functionality to configure your web server//
 const app = express();
 
+//uuid module//
+const uuid = require('uuid');
+
 //creatrs a write stream in append mode, and a log.txt file in the root directory//
 //no longer useing node built in modules 'fs' and 'path'//
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
@@ -24,23 +27,74 @@ const topTenMovies =
         'Rent',
         'Everything Everywhere All At Once']}
 
-//step 2 - pulls movie data//
+//pulls movie data for Top Ten Movies//
 app.get('/movies', (req, res) => {
     res.json(topTenMovies);
 })
 
-//step 3 - text response of my choosing//
+//returns list of ALL movies//
+app.get('/movies', (req, res) => {
+    res.send('Successful GET request returnig data on all movies')
+});
+
+//returns data about single movie by description//
+app.get('/movies/[description]', (req, res) => {
+    res.send('Successful GET request returning data about movie by description')
+});
+
+////returns data about single movie by genre//
+app.get('/movies/[genre]', (req, res) => {
+    res.send('Successful GET request returning data about movie by genre')
+});
+
+////returns data about single movie by director name//
+app.get('/movies/[director]', (req, res) => {
+    res.send('Successful GET request returning data about movie by director')
+});
+
+//returns data about single movie by image URL//
+app.get('/movies/[image]', (req, res) => {
+    res.send('Successful GET request returning data about movie by image')
+});
+
+//returns data about single movie by featured or not featured//
+app.get('/movies/[featured]', (req, res) => {
+    res.send('Successful GET request returning data about movie by whether or not it is featured')
+});
+
+//returns data about genre when searching by name of movie//
+app.get('/movies/[name]/genre', (req, res) => {
+    res.send('Successful GET request returning data about genre of movie based on name')
+});
+
+//returns data about director by searching name of movie//
+app.get('/movies/[name]/director', (req, res) => {
+    res.send('Successful GET request returning data about director of movie based on name')
+});
+
+//Allow users to add a movie to their list of favorites (showing only a text that a movie has been added)//
+app.put('/users/favorites', (req, res) => {
+    res.send('Successful PUT request adding movie to list of favorites')
+});
+//CODE FROM 2.5 ASSIGNMENT EXAMPLE
+
+
+
+
+
+//Code from 2.4 Assignment//
+//text response of my choosing//
 app.get('/', (req, res) => {
     res.send('Welcome to my Movie Club!');
 })
 
-//step 4 - express.static serves documentation.html file from the public folder//
+//express.static serves documentation.html file from the public folder//
 app.use(express.static(path.join(__dirname, 'public')));
 
-//step 5 - setup the logger//
+//setup the logger//
 app.use(morgan('combined', {stream:accessLogStream}));
 
-//step 6 - code for errors //
+//code for errors //
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
