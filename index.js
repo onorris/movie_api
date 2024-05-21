@@ -76,9 +76,33 @@ app.get('/movies/[name]/director', (req, res) => {
 app.put('/users/favorites', (req, res) => {
     res.send('Successful PUT request adding movie to list of favorites')
 });
-//CODE FROM 2.5 ASSIGNMENT EXAMPLE
+// PUT CODE FROM 2.5 ASSIGNMENT EXAMPLE
+// Update the "grade" of a student by student name/class name
+//app.put('/students/:name/:class/:grade', (req, res) => {
+ //   let student = students.find((student) => { return student.name === req.params.name });
+  
+   // if (student) {
+     // student.classes[req.params.class] = parseInt(req.params.grade);
+      //res.status(201).send('Student ' + req.params.name + ' was assigned a grade of ' + req.params.grade + ' in ' + req.params.class);
+   // } else {
+    //  res.status(404).send('Student with the name ' + req.params.name + ' was not found.');
+   // }
+ // });//
 
-
+//Remove a movie from their list of favorites by name//
+app.delete('/users/favorites', (req, res) => {
+    res.send('Successful DELETE request removing movie to list of favorites')
+});
+//DELETE CODE FROM 2.5 ASSIGNMENT EXAMPLE 
+// Deletes a student from our list by ID
+//app.delete('/students/:id', (req, res) => {
+  //  let student = students.find((student) => { return student.id === req.params.id });
+  
+    //if (student) {
+      //students = students.filter((obj) => { return obj.id !== req.params.id });
+      //res.status(201).send('Student ' + req.params.id + ' was deleted.');
+   // }
+ // });
 
 
 
