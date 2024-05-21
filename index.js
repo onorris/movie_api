@@ -104,9 +104,35 @@ app.delete('/users/favorites', (req, res) => {
    // }
  // });
 
+//Allows new users to register//
+app.post('/users'), (req, res) => {
+    res.send('Successful POST request adding user to site')
+};
+//POST CODE FROM 2.5 ASSIGNMENT EXAMPLE
+//app.post('/students', (req, res) => {
+  //  let newStudent = req.body;
+  
+    //if (!newStudent.name) {
+     // const message = 'Missing name in request body';
+      //res.status(400).send(message);
+    //} else {
+      //newStudent.id = uuid.v4();
+     // students.push(newStudent);
+     // res.status(201).send(newStudent);
+    //}
+ // });
 
+//Allow new users to update their user info (username)//
+app.put('/users'), (req, res) => {
+    res.send('Successful PUT request indicating that username is updated')
+};
 
-//Code from 2.4 Assignment//
+//Allow existing users to deregister (showing text that a user email has been removed)//
+app.delete('/users', (req, res) => {
+    res.send('Successful DELETE request removing user from website')
+});
+
+//Code from Previous 2.4 Assignment//
 //text response of my choosing//
 app.get('/', (req, res) => {
     res.send('Welcome to my Movie Club!');
