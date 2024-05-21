@@ -71,14 +71,14 @@
                 </tr>
                 <tr>
                     <td>Return data about a genre (description) by name/title of movie</td>
-                    <td>/movies/[genre]/[name]</td>
+                    <td>/movies/[name]/genre</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about the genre of a specific movie</td>
                 </tr>
                 <tr>
                     <td>Return data about a director (bio, birth year, death year) by name</td>
-                    <td>/movies/[director]/[name]</td>
+                    <td>/movies/[name]/director</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about a director, based on name</td>
@@ -86,14 +86,14 @@
                 <tr>
                     <td>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added)
                     </td>
-                    <td>/movies</td>
+                    <td>/users/favorites</td>
                     <td>PUT</td>
                     <td>None</td>
                     <td>Text indicating that a movie has been added to a list</td>
                 </tr>
                 <tr>
-                    <td>Remove a movie from their list of favorites </td>
-                    <td>/movies/[ID]</td>
+                    <td>Remove a movie from their list of favorites by name</td>
+                    <td>/users/favorites</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>Text that a movie has been removed</td>
@@ -121,7 +121,6 @@
                 </tr>
             </tbody>
         </table>
-
 
     </body>
 </html>
