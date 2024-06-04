@@ -33,40 +33,39 @@ app.get('/movies/:title', (req, res) => {
 });
 
 //Returns data about a genre by name//
-app.get('movies/genre/:genreName', (req, res) => {
+app.get('/movies/genre/:genreName', (req, res) => {
     res.send('Succesful GET request returning information about genre by name')
 });
 
 //Returns data about a director//
-app.get('movies/directors/:directorName', (req, res) => {
+app.get('/movies/directors/:directorName', (req, res) => {
     res.send('Succesful GET request returning information about a director')
 });
 
 //Allow users to add a movie to their list of favorites//
-app.put ('users/id/:favorites', (req, res) => {
+app.put ('/users/id/:favorites', (req, res) => {
     res.send('Successful PUT request adding movie to Favorites List')
 });
 
 //Remove a movie from their list of favorites//
-app.delete('users/id/:favorites', (req, res) => {
+app.delete('/users/id/:favorites', (req, res) => {
     res.send('Successful DELETE request removing movie from Favorites List')
 });
 
 //Allows new users to register//
-app.post('users/:id'), (req, res) => {
+app.post('/users/:id'), (req, res) => {
     res.send('Successful POST request adding user to site')
 };
 
 //Allow new users to update their user info (username)//
-app.put('users/:id'), (req, res) => {
+app.put('/users/:id'), (req, res) => {
     res.send('Successful PUT request indicating that username is updated')
 };
 
 //Allow existing users to deregister (showing text that a user email has been removed)//
-app.delete('users/:id', (req, res) => {
+app.delete('/users/:id', (req, res) => {
     res.send('Successful DELETE request removing user from website')
 });
-
 
 //express.static serves documentation.html file from the public folder//
 app.use(express.static(path.join(__dirname, 'public')));
