@@ -53,7 +53,7 @@ app.delete('/users/id/:favorites', (req, res) => {
 });
 
 //Allows new users to register//
-app.post('/users/:id'), (req, res) => {
+app.post('/'), (req, res) => {
     res.send('Successful POST request adding user to site')
 };
 
