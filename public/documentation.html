@@ -18,109 +18,92 @@
                 padding: 10px 10px;
             }
         </style>
-        <table>
-            <tbody>
-                <tr>
-                    <th>REQUEST</th>
-                    <th>URL</th>
-                    <th>HTTP METHOD</th>
-                    <th>Request Body Data Format</th>
-                    <th>Response Body Data Format</th>
-                </tr>
-                <tr>
-                    <td>Return a list of ALL movies</td>
-                    <td>/movies</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about all the movies</td>
-                </tr>
-                <tr>
-                    <td>Return data about a SINGLE movie by description</td>
-                    <td>/movies/[description]</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about a single movie, based on its description</td>
-                </tr>
-                <tr>
-                    <td>Return data about a SINGLE movie by genre</td>
-                    <td>/movies/[genre]</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about a single movie, based on the genre</td>
-                </tr>
-                <tr>
-                    <td>Return data about a SINGLE movie by director name</td>
-                    <td>/movies/[director]</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about a single movie, based on the director</td>
-                </tr>
-                <tr>
-                    <td>Return data about a SINGLE movie by image URL</td>
-                    <td>/movies/[image]</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about a single movie, based on image URL</td>
-                </tr>
-                <tr>
-                    <td>Return data about a SINGLE movie by whether or not its featured</td>
-                    <td>/movies/[featured]</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about a single movie, based on whether or not its featured</td>
-                </tr>
-                <tr>
-                    <td>Return data about a genre (description) by name/title of movie</td>
-                    <td>/movies/[name]/genre</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about the genre of a specific movie</td>
-                </tr>
-                <tr>
-                    <td>Return data about a director (bio, birth year, death year) by name</td>
-                    <td>/movies/[name]/director</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about a director, based on name</td>
-                </tr>
-                <tr>
-                    <td>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added)
-                    </td>
-                    <td>/users/favorites</td>
-                    <td>PUT</td>
-                    <td>None</td>
-                    <td>Text indicating that a movie has been added to a list</td>
-                </tr>
-                <tr>
-                    <td>Remove a movie from their list of favorites by name</td>
-                    <td>/users/favorites</td>
-                    <td>DELETE</td>
-                    <td>None</td>
-                    <td>Text that a movie has been removed</td>
-                </tr>
-                <tr>
-                    <td>Allow new users to register</td>
-                    <td>/users</td>
-                    <td>POST</td>
-                    <td>A JSON object holding data about the user to add</td>
-                    <td>Text indicating that user has been registered</td>
-                </tr>
-                <tr>
-                    <td>Allow new users to update their user info (username)</td>
-                    <td>/users</td>
-                    <td>PUT</td>
-                    <td>None</td>
-                    <td>Text indicating that their username has been updated</td>
-                </tr>
-                <tr>
-                    <td>Allow existing users to deregister (showing text that a user email has been removed)</td>
-                    <td>/users</td>
-                    <td>DELETE</td>
-                    <td>None</td>
-                    <td>Text that a user email has been removed</td>
-                </tr>
-            </tbody>
-        </table>
-
-    </body>
+<table>
+    <tbody>
+        <tr>
+            <th>What kind of data does the endpoint return?</th>
+            <th>Endpoint URL</th>
+            <th>Query Parameters</th>
+            <th>HTTP METHOD</th>
+            <th>Request body data format</th>
+            <th>Response body data format</th>
+        </tr>
+        <tr>
+            <td>Return a list of ALL movies to the user</td>
+            <td>/movies</td>
+            <td>None</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding data about all the movies</td>
+        </tr>
+        <tr>
+            <td>Return ALL data (description, genre, director, image URL, whether or not it's featured) about a single
+                movie by the user entering the TITLE of a movie</td>
+            <td>/movies</td>
+            <td>:title</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding all data about a single movie: {Title: "Up", Genre: "Animation", Director: "Pete
+                Docter", image URL: link here, Feature Status: yes}</td>
+        </tr>
+        <tr>
+            <td>Return data about a genre (description) by the user entering the name of the genre</td>
+            <td>/movies/genre</td>
+            <td>:genreName</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding data regarding the genre of a single movie</td>
+        </tr>
+        <tr>
+            <td>Return data about a director by the user entering the NAME of the director</td>
+            <td>/movies/directors</td>
+            <td>:directorName</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding all data about a single director: {Name:Pete Docter, Birthdate: 10/09/1968}</td>
+        </tr>
+        <tr>
+            <td>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added)
+            </td>
+            <td>/users/id</td>
+            <td>:favorites</td>
+            <td>PUT</td>
+            <td>None</td>
+            <td>Text indicating: "Movie has been added to Favorites List"</td>
+        </tr>
+        <tr>
+            <td>Remove a movie from their list of favorites </td>
+            <td>/users/id</td>
+            <td>:favorites</td>
+            <td>DELETE</td>
+            <td>None</td>
+            <td>Text indicating: "Movie has been removed from Favorites List"</td>
+        </tr>
+        <tr>
+            <td>Allow new users to register</td>
+            <td>/users</td>
+            <td>:id</td>
+            <td>POST</td>
+            <td>A JSON object holding data about the user to add: {name: Olivia, email address: o123@gmail.com}</td>
+            <td>Text indicating: "User has been registered"</td>
+        </tr>
+        <tr>
+            <td>Allow new users to update their user info (username)</td>
+            <td>/users</td>
+            <td>:id</td>
+            <td>PUT</td>
+            <td>None</td>
+            <td>Text indicating: "User information has been updated"</td>
+        </tr>
+        <tr>
+            <td>Allow existing users to deregister (showing text that a user email has been removed)</td>
+            <td>/users</td>
+            <td>:id</td>
+            <td>DELETE</td>
+            <td>None</td>
+            <td>Text indicating: "User email has been successfully unregistered"</td>
+        </tr>
+    </tbody>
+</table>
+</body>
 </html>
