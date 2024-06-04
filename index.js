@@ -53,14 +53,14 @@ app.delete('/users/id/:favorites', (req, res) => {
 });
 
 //Allows new users to register//
-app.post('/'), (req, res) => {
+app.post('/users/id/:register', (req, res) => {
     res.send('Successful POST request adding user to site')
-};
+});
 
 //Allow new users to update their user info (username)//
-app.put('/users/:id'), (req, res) => {
+app.put('/users/:id', (req, res) => {
     res.send('Successful PUT request indicating that username is updated')
-};
+});
 
 //Allow existing users to deregister (showing text that a user email has been removed)//
 app.delete('/users/:id', (req, res) => {
