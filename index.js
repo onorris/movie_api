@@ -1,3 +1,12 @@
+//integrates Mongoose and models.js into the API//
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
+mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true});
+
 //imports the express module locally so it can be used //
 const express = require('express');
     morgan = require('morgan'),
