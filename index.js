@@ -25,6 +25,13 @@ const { title } = require('process');
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 const port = 8080
 
+//express.static serves documentation.html file from the public folder//
+app.use(express.static(path.join(__dirname, 'public')));
+
+//setup the Middleware//
+app.use(morgan('combined', {stream:accessLogStream}));
+
+
 //GET requests//
 app.get('/', (req, res) => {
     res.send('Welcome to my Movie Club!');
@@ -102,18 +109,6 @@ app.put('/users/:id', (req, res) => {
 app.delete('/users/:id', (req, res) => {
     res.send('Successful DELETE request removing user from website')
 });
-
-//express.static serves documentation.html file from the public folder//
-app.use(express.static(path.join(__dirname, 'public')));
-
-//setup the Middleware//
-app.use(morgan('combined', {stream:accessLogStream}));
-
-//code for errors //
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-  });
 
 //listen for requests
 app.listen(port, () => {
