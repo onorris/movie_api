@@ -66,9 +66,16 @@ app.get('/movies/genre/:genreName', async (req, res) => {
     });
 });
 
-//Returns data about a director//
-app.get('/movies/directors/:directorName', (req, res) => {
-    res.send('Succesful GET request returning information about a director')
+//Returns JSON data about a director//
+app.get('/movies/directors/:directorName', async (req, res) => {
+    await Movies.findOne({"Director.Name": req.params.directorName})
+    .then((movie) => {
+        res.json(movie.Director);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).send("Error: " + err);
+    });
 });
 
 //Allow users to add a movie to their list of favorites//
