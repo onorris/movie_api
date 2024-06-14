@@ -171,15 +171,41 @@ app.delete('/users/:Username', async (req, res) => {
 });
 
 //Allow users to add a movie to their list of favorites//
-app.put ('/users/id/:favorites', (req, res) => {
-    res.send('Successful PUT request adding movie to Favorites List')
+app.post ('/users/:Username/movies/:MovieID', async (req, res) => {
+    await Users.findOneAndUpdate({Username: req.params.Username},
+    {$push: {FavoriteMovies: req.params.MovieID}
+    },
+    {new: true}) //Makes sure updated doument is returned
+    .then((updatedUser) => {
+        res.json(updatedUser);
+        })
+    .catch((err) => {
+        res.json(updatedUser);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+    });
 });
+
 
 //Remove a movie from their list of favorites//
-app.delete('/users/id/:favorites', (req, res) => {
-    res.send('Successful DELETE request removing movie from Favorites List')
+app.delete ('/users/:Username/movies/:MovieID', async (req, res) => {
+    await Users.findOneAndUpdate({Username: req.params.Username},
+    {$pull: {FavoriteMovies: req.params.MovieID}
+    },
+    {new: true}) //Makes sure updated doument is returned
+    .then((updatedUser) => {
+        res.json(updatedUser);
+        })
+    .catch((err) => {
+        res.json(updatedUser);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+    });
 });
-
 
 //express.static serves documentation.html file from the public folder//
 app.use(express.static(path.join(__dirname, 'public')));
