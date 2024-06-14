@@ -5,7 +5,7 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/cfDB');
 
 //imports the express module locally so it can be used //
 const express = require('express');
@@ -29,11 +29,16 @@ app.get('/', (req, res) => {
     res.send('Welcome to my Movie Club!');
 })
 
-//Assignment 2.5//
-
-//returns list of ALL movies//
+//returns JSON object with list of all movies//
 app.get('/movies', (req, res) => {
-    res.send('Successful GET request returning data on all movies')
+    Movies.find()
+    .then((movies) => {
+        res.status(201).json(movies);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+    });
 });
 
 //returns ALL data about single movie//
