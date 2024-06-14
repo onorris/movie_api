@@ -18,6 +18,7 @@ const app = express();
 
 //uuid (universally unique identifier) module//
 const uuid = require('uuid');
+const { title } = require('process');
 
 //create a write stream in append mode, and a log.txt file in the root directory//
 //no longer using node built in modules 'fs' and 'path'//
@@ -41,9 +42,16 @@ app.get('/movies', (req, res) => {
     });
 });
 
-//returns ALL data about single movie//
-app.get('/movies/:title', (req, res) => {
-    res.send('Successful GET request returning data on single movie')
+//returns ALL data about single movie in JSON object format//
+app.get('/movies/:Title', (req, res) => {
+    Movies.findOne({Title: req.params.Title})
+    .then((movie) => {
+        res.json(movie);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: "+ err);
+    });
 });
 
 //Returns data about a genre by name//
