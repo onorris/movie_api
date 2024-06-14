@@ -54,9 +54,16 @@ app.get('/movies/:Title', (req, res) => {
     });
 });
 
-//Returns data about a genre by name//
-app.get('/movies/genre/:genreName', (req, res) => {
-    res.send('Succesful GET request returning information about genre by name')
+//Returns JSON data about a genre by name//
+app.get('/movies/genre/:genreName', async (req, res) => {
+    await Movies.findOne({"Genre.Name": req.params.genreName})
+    .then((movie) => {
+        res.json(movie.Genre);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).send("Error: "+ err);
+    });
 });
 
 //Returns data about a director//
