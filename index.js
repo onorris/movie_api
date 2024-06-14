@@ -154,6 +154,22 @@ app.put('/users/:Username', async (req, res) => {
     }) 
 });
 
+//Allow existing users to deregister/delete (showing text that a user email has been removed)//
+app.delete('/users/:Username', async (req, res) => {
+   await Users.findOneAndDelete({Username: req.params.Username})
+    .then((user) => {
+        if (!user) {
+            res.status(400).send(req.params.Username + " was not found");
+        } else {
+            res.status(200).send(req.params.Username + " was deleted.");
+        }
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+    });
+});
+
 //Allow users to add a movie to their list of favorites//
 app.put ('/users/id/:favorites', (req, res) => {
     res.send('Successful PUT request adding movie to Favorites List')
@@ -164,10 +180,6 @@ app.delete('/users/id/:favorites', (req, res) => {
     res.send('Successful DELETE request removing movie from Favorites List')
 });
 
-//Allow existing users to deregister (showing text that a user email has been removed)//
-app.delete('/users/:id', (req, res) => {
-    res.send('Successful DELETE request removing user from website')
-});
 
 //express.static serves documentation.html file from the public folder//
 app.use(express.static(path.join(__dirname, 'public')));
