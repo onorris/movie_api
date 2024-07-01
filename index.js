@@ -22,6 +22,11 @@ app.use(express.urlencoded({extended: true }));
 const uuid = require('uuid');
 const { title } = require('process');
 
+//imports auth.js and passport file into project//
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
 //create a write stream in append mode, and a log.txt file in the root directory//
 //no longer using node built in modules 'fs' and 'path'//
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
@@ -34,7 +39,7 @@ app.get('/', (req, res) => {
 })
 
 //returns JSON object with list of all movies when at /movies //
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false}), (req, res) => {
     Movies.find()
     .then((movies) => {
         res.status(201).json(movies);
@@ -111,7 +116,7 @@ app.post("/users", async (req, res) => {
                 Username: req.body.Username,
                 Password: req.body.Password,
                 Email: req.body.Email,
-                Birthday: req.body.Birthday,
+                Birthday: req.body.Birthday
             })
             .then((user) => {
                 res.status(201).json(user);
@@ -135,7 +140,11 @@ Password: String, (required)
 Email: String, (required)
 Birthday: Date}*/
 //firt updates users with a certain username, then uses $set to specify which fields in the user document you're updating//
-app.put('/users/:Username', async (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', {session:false}), async (req, res) => {
+    //Condition to check here//
+    if(req.user.Username !== req.params.Username){
+        return res.status(400).send('Permission denied');
+    }
     await Users.findOneAndUpdate( {Username: req.params.Username},
         {$set:
             {Username: req.body.Username,
@@ -212,12 +221,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //setup the Middleware//
 app.use(morgan('combined', {stream:accessLogStream}));
-app.use(bodyParser.urlencoded({extended: true}));
-
-//imports auth.js and passport file into project//
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
 
 //listen for requests
 app.listen(port, () => {

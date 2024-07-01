@@ -11,10 +11,8 @@ let Users = Models.User,
 //Mongoose to check database for user with the same username. If matched, callback function executed//
 passport.use(
     new LocalStrategy(
-    {
-        usernameField: 'Username',
-        passwordField: 'Password',
-    },
+    {usernameField: 'Username',
+    passwordField: 'Password'},
     async (username, password, callback) => {
         console.log(`${username} ${password}`);
         await Users.findOne({ Username: username })
@@ -23,17 +21,19 @@ passport.use(
                 console.log('incorrect username');
                 return callback(null, false, {
                     message: 'Incorrect username or password.',
-                })};
-            })
+                });
+            }
         console.log('finished');
         return callback(null, user);
-        })
+    })
         .catch((error) => {
             if (error) {
                 console.log(error);
                 return callback(error);
-            }
-        })
+                }
+            })
+        }    
+    )
 );
 
 //Authenticates users based on the JWT submitted with their request//
