@@ -212,6 +212,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //setup the Middleware//
 app.use(morgan('combined', {stream:accessLogStream}));
+app.use(bodyParser.urlencoded({extended: true}));
+
+//imports auth.js and passport file into project//
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 //listen for requests
 app.listen(port, () => {
