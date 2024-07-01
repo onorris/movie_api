@@ -51,7 +51,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false}), (req, res) =
 });
 
 //returns ALL data about single movie in JSON object format//
-app.get('/movies/:Title', (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false}), (req, res) => {
     Movies.findOne({Title: req.params.Title})
     .then((movie) => {
         res.json(movie);
