@@ -22,10 +22,12 @@ app.use(express.urlencoded({extended: true }));
 const uuid = require('uuid');
 const { title } = require('process');
 
-//imports auth.js and passport file into project//
+//imports auth.js, passport file and cors into project//
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
+const cors = require('cors');
+app.use(cors());
 
 //create a write stream in append mode, and a log.txt file in the root directory//
 //no longer using node built in modules 'fs' and 'path'//
