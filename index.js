@@ -114,8 +114,22 @@ Password, String,
 Email: String,
 Birthday: Date
 }*/
-app.post("/users", async (req, res) => {
+app.post("/users", 
+    //validation logic here//
+    [check('Username', 'Username is required').isLength({min:5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()],
+    async (req, res) => {
+    //check the validation object for errors//
+        let errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
     let hashedPassword = Users.hashedPassword(req.body.Password);
+
+    //search to see if user with the requested username already exists//
     await Users.findOne({Username: req.body.Username})
     .then((user) => {
         if (user) {
