@@ -162,9 +162,23 @@ app.post("/users",
 Password: String, (required)
 Email: String, (required)
 Birthday: Date}*/
-//firt updates users with a certain username, then uses $set to specify which fields in the user document you're updating//
-app.put('/users/:Username', passport.authenticate('jwt', {session:false}), async (req, res) => {
-    //Condition to check here//
+//first updates users with a certain username, then uses $set to specify which fields in the user document you're updating//
+app.put('/users/:Username', passport.authenticate('jwt', {session:false}),
+    [//validation logic here//
+    check('Username', 'Username is required').isLength({min:5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+    ], async (req, res) => {
+
+    //Checks for validation errors//
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+
+    //Condition to check if same user is making the PUT request//
     if(req.user.Username !== req.params.Username){
         return res.status(400).send('Permission denied');
     }
