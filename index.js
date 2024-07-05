@@ -121,6 +121,7 @@ Email: String,
 Birthday: Date
 }*/
 app.post("/users", async (req, res) => {
+    let hashedPassword = Users.hashedPassword(req.body.Password);
     await Users.findOne({Username: req.body.Username})
     .then((user) => {
         if (user) {
