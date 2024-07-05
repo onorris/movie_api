@@ -27,6 +27,7 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
+//step 1 assignment 2.10 - implement CORS so that all domains are allowed to make requests to API//
 const cors = require('cors');
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 app.use(cors());
