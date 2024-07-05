@@ -5,7 +5,11 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/cfDB');
+//mongodb+srv://oliviagdewald:Threeonetwo@odndb.jdewx7k.mongodb.net/?retryWrites=true&w=majority&appName=OdNdB
+//mongoose.connect('mongodb+srv://oliviagdewald:Threeonetwo93!@odndb.jdewx7k.mongodb.net/OdNdB?retryWrites=true&w=majority&appName=OdNdB');//
+mongoose.connect( process.env.CONNECTION_URI);
+
+
 
 //imports the express module locally so it can be used //
 const express = require('express');
