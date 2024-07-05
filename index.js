@@ -263,7 +263,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('combined', {stream:accessLogStream}));
 
 //listen for requests
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 app.listen(port, '0.0.0.0',() => {
     console.log(`Listening on Port ` + port);
   });
