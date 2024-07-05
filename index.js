@@ -1,9 +1,8 @@
 //integrates Mongoose and models.js into the API//
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-console.log(process)
+//console.log(process.env.CONNECTION_URI)
 mongoose.connect(process.env.CONNECTION_URI);
-console.log('connection successful')
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -34,7 +33,6 @@ require('./passport');
 
 //step 1 assignment 2.10 - implement CORS so that all domains are allowed to make requests to API//
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 app.use(cors());
 
 //requires express-validator//
