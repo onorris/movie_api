@@ -32,6 +32,9 @@ const cors = require('cors');
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 app.use(cors());
 
+//requires express-validator//
+const { check, validationResult} = require('express-validator');
+
 //create a write stream in append mode, and a log.txt file in the root directory//
 //no longer using node built in modules 'fs' and 'path'//
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
