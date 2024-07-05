@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 
 mongoose.connect(process.env.CONNECTION_URI);
+console.log('connection successful')
 
 const Movies = Models.Movie;
 const Users = Models.User;
 
 //mongodb+srv://oliviagdewald:Threeonetwo@odndb.jdewx7k.mongodb.net/?retryWrites=true&w=majority&appName=OdNdB//
 //mongodb+srv://oliviagdewald:Threeonetwo93@odndb.jdewx7k.mongodb.net/?retryWrites=true&w=majority&appName=OdNdB
-mongoose.connect('mongodb+srv://oliviagdewald:Threeonetwo93!@odndb.jdewx7k.mongodb.net/OdNdB?retryWrites=true&w=majority&appName=OdNdB');
-
+//mongoose.connect('mongodb+srv://oliviagdewald:Threeonetwo93!@odndb.jdewx7k.mongodb.net/OdNdB?retryWrites=true&w=majority&appName=OdNdB');
 const bodyParser = require('body-parser');
 //imports the express module locally so it can be used //
 const express = require('express');
