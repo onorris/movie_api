@@ -1,7 +1,7 @@
 //integrates Mongoose and models.js into the API//
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-
+console.log(process)
 mongoose.connect(process.env.CONNECTION_URI);
 console.log('connection successful')
 
