@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 //schema for documents in "Movies" collection//
 let movieSchema = mongoose.Schema({
