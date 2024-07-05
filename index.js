@@ -2,14 +2,14 @@
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI);
 
 const Movies = Models.Movie;
 const Users = Models.User;
 
 //mongodb+srv://oliviagdewald:Threeonetwo@odndb.jdewx7k.mongodb.net/?retryWrites=true&w=majority&appName=OdNdB//
 //mongodb+srv://oliviagdewald:Threeonetwo93@odndb.jdewx7k.mongodb.net/?retryWrites=true&w=majority&appName=OdNdB
-//mongoose.connect('mongodb+srv://oliviagdewald:Threeonetwo93!@odndb.jdewx7k.mongodb.net/OdNdB?retryWrites=true&w=majority&appName=OdNdB');
+mongoose.connect('mongodb+srv://oliviagdewald:Threeonetwo93!@odndb.jdewx7k.mongodb.net/OdNdB?retryWrites=true&w=majority&appName=OdNdB');
 
 const bodyParser = require('body-parser');
 //imports the express module locally so it can be used //
@@ -264,6 +264,6 @@ app.use(morgan('combined', {stream:accessLogStream}));
 
 //listen for requests
 const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0', function() {
+app.listen(port, '0.0.0.0',() => {
     console.log(`Listening on Port ` + port);
   });
