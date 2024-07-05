@@ -38,8 +38,6 @@ const { check, validationResult} = require('express-validator');
 //create a write stream in append mode, and a log.txt file in the root directory//
 //no longer using node built in modules 'fs' and 'path'//
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
-const port = 8080
-
 
 //default text response//
 app.get('/', (req, res) => {
@@ -260,6 +258,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('combined', {stream:accessLogStream}));
 
 //listen for requests
-app.listen(port, () => {
-    console.log(`API listening on port 8080`);
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Listening on Port ` + port);
   });
