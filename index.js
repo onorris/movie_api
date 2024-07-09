@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 
-//console.log(process.env.CONNECTION_URI)
+console.log(process.env.CONNECTION_URI)
 mongoose.connect(process.env.CONNECTION_URI);
 
 const Movies = Models.Movie;
@@ -126,7 +126,7 @@ app.post("/users",
             return res.status(422).json({ errors: errors.array() });
         }
 
-    let hashedPassword = Users.hashedPassword(req.body.Password);
+    let hashedPassword = Users.hashPassword(req.body.Password);
 
     //search to see if user with the requested username already exists//
     await Users.findOne({Username: req.body.Username})
@@ -136,7 +136,7 @@ app.post("/users",
         } else {
             Users.create({
                 Username: req.body.Username,
-                Password: req.body.Password,
+                Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday
             })
