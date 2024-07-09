@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 
-console.log(process.env.CONNECTION_URI)
+console.log(process.env)
 mongoose.connect(process.env.CONNECTION_URI);
 
 const Movies = Models.Movie;
@@ -184,7 +184,7 @@ app.put('/users/:Username', passport.authenticate('jwt', {session:false}),
     await Users.findOneAndUpdate( {Username: req.params.Username},
         {$set:
             {Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
             }
