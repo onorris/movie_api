@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 
 console.log(process.env)
-mongoose.connect(process.env.CONNECTION_URI);
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true});
 
 const Movies = Models.Movie;
 const Users = Models.User;
