@@ -1,28 +1,24 @@
 //integrates Mongoose and models.js into the API//
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-
-console.log(process.env)
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true});
-
 const Movies = Models.Movie;
 const Users = Models.User;
 
-const bodyParser = require('body-parser');
 //imports the express module locally so it can be used //
 const express = require('express');
+    app = express();
     morgan = require('morgan'),
     fs = require('fs'), //import built in node modules fs and path 
     path = require('path');
+    bodyParser = require('body-parser');
 
 //declares 'app' variable that encapsulates Express's functionality to configure your web server//
-const app = express();
 app.use(express.json()),
 app.use(express.urlencoded({extended: true }));
 
 //uuid (universally unique identifier) module//
 const uuid = require('uuid');
-//const { title } = require('process');
+
 
 //imports auth.js, passport file and cors into project//
 app.use(bodyParser.urlencoded({extended: true}));
@@ -30,7 +26,7 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-//step 1 assignment 2.10 - implement CORS so that all domains are allowed to make requests to API//
+//implement CORS so that all domains are allowed to make requests to API//
 const cors = require('cors');
 app.use(cors());
 
@@ -40,6 +36,9 @@ const { check, validationResult} = require('express-validator');
 //create a write stream in append mode, and a log.txt file in the root directory//
 //no longer using node built in modules 'fs' and 'path'//
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
+
+console.log(process.env)
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true});
 
 //default text response//
 app.get('/', (req, res) => {
