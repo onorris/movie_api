@@ -172,7 +172,8 @@ app.put('/users/:Username', passport.authenticate('jwt', {session:false}),
 
     //Checks for validation errors//
     let errors = validationResult(req);
-
+    let hashedPassword = Users.hashPassword(req.body.Password);
+    
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
