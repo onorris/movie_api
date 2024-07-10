@@ -25,6 +25,7 @@ const uuid = require('uuid');
 //const { title } = require('process');
 
 //imports auth.js, passport file and cors into project//
+app.use(bodyParser.urlencoded({extended: true}));
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');

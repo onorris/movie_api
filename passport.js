@@ -4,17 +4,19 @@ const passport = require('passport'),
     passportJWT = require('passport-jwt');
 
 let Users = Models.User,
-    JWTStrategy= passportJWT.Strategy,
+    JWTStrategy = passportJWT.Strategy,
     ExtractJWT = passportJWT.ExtractJwt;
 
 //defines basic HTTP authentication for login requests - takes username and password from request body and uses
 //Mongoose to check database for user with the same username. If matched, callback function executed//
 passport.use(
     new LocalStrategy(
-    {usernameField: 'Username',
-    passwordField: 'Password'},
+    {
+        usernameField: 'Username',
+        passwordField: 'Password',
+    },
     async (username, password, callback) => {
-        console.log(`${username} ${password}`);
+        console.log('${username} ${password}');
         await Users.findOne({ Username: username })
         .then((user) => {
             if (!user) {
